@@ -58,7 +58,10 @@ export default defineComponent({
 
 <template>
   <div>Score: {{ score }}</div>
-  <div ref="game">
+  <div
+    id="game"
+    ref="game"
+  >
   </div>
 </template>
 
