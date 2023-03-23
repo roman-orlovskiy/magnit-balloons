@@ -10,13 +10,19 @@ export default defineComponent({
     };
   },
   mounted() {
+    const gameContainer = this.$refs.game;
+
     const app = new PIXI.Application({
-      width: window.innerWidth,
-      height: window.innerHeight,
-      backgroundColor: 0x1099bb,
+      width: gameContainer.offsetWidth,
+      height: gameContainer.offsetHeight,
+      antialias: true,
       resolution: window.devicePixelRatio || 1,
     });
-    this.$refs.game.appendChild(app.view);
+
+    this.$refs.game__field.appendChild(app.view);
+    window.addEventListener('resize', () => {
+      app.renderer.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
+    });
 
     const ballTexture = PIXI.Texture.from(ballImg);
     const balls = [];
@@ -57,19 +63,24 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>Score: {{ score }}</div>
   <div
-    id="game"
     ref="game"
+    class="game"
   >
+    <div
+      ref="game__field"
+      class="game__field"
+    >
+    </div>
   </div>
 </template>
 
 <style scoped>
-#game {
-  position: absolute;
-  top: 0;
-  left: 0;
+.game {
+  margin: 0 auto;
+  max-width: 600px;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
-
 </style>
