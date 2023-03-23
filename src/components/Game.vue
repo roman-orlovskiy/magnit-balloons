@@ -1,16 +1,72 @@
-<script setup>
-import { ref } from 'vue';
+<script>
 import ballImg from '../assets/ball.png';
+import { defineComponent } from 'vue';
+import * as PIXI from 'pixi.js';
 
-const score = ref(0)
+export default defineComponent({
+  data() {
+    return {
+      score: 0,
+    };
+  },
+  mounted() {
+    const app = new PIXI.Application({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      backgroundColor: 0x1099bb,
+      resolution: window.devicePixelRatio || 1,
+    });
+    this.$refs.game.appendChild(app.view);
+
+    const ballTexture = PIXI.Texture.from(ballImg);
+    const balls = [];
+
+    function createBall() {
+      const ball = new PIXI.Sprite(ballTexture);
+      ball.anchor.set(0.5);
+      ball.x = Math.random() * app.screen.width;
+      ball.y = Math.random() * app.screen.height;
+      ball.interactive = true;
+      ball.buttonMode = true;
+      ball.on('pointerdown', () => {
+        app.ticker.add(() => {
+          ball.alpha -= 0.1;
+          if (ball.alpha <= 0) {
+            app.ticker.remove(() => {});
+            app.stage.removeChild(ball);
+          }
+        });
+      });
+      return ball;
+    }
+
+    function addBall() {
+      const ball = createBall();
+      balls.push(ball);
+      app.stage.addChild(ball);
+    }
+
+    app.ticker.add(() => {
+      if (balls.length < 10) {
+        addBall();
+      }
+    });
+  },
+});
+
 </script>
 
 <template>
   <div>Score: {{ score }}</div>
   <div ref="game">
-    <img :src="ballImg">
   </div>
 </template>
 
 <style scoped>
+#game {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 </style>
