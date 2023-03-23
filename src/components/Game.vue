@@ -12,16 +12,17 @@ export default defineComponent({
   mounted() {
     const gameContainer = this.$refs.game;
 
-    const app = new PIXI.Application({
+    const renderer = new PIXI.Application({
       width: gameContainer.offsetWidth,
       height: gameContainer.offsetHeight,
       antialias: true,
-      resolution: window.devicePixelRatio || 1,
+      transparent: true,
+      resolution: 1,
     });
 
-    this.$refs.game__field.appendChild(app.view);
+    this.$refs.game__renderer.appendChild(renderer.view);
     window.addEventListener('resize', () => {
-      app.renderer.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
+      renderer.renderer.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
     });
 
     const ballTexture = PIXI.Texture.from(ballImg);
@@ -30,16 +31,16 @@ export default defineComponent({
     function createBall() {
       const ball = new PIXI.Sprite(ballTexture);
       ball.anchor.set(0.5);
-      ball.x = Math.random() * app.screen.width;
-      ball.y = Math.random() * app.screen.height;
+      ball.x = Math.random() * renderer.screen.width;
+      ball.y = Math.random() * renderer.screen.height;
       ball.interactive = true;
       ball.buttonMode = true;
       ball.on('pointerdown', () => {
-        app.ticker.add(() => {
+        renderer.ticker.add(() => {
           ball.alpha -= 0.1;
           if (ball.alpha <= 0) {
-            app.ticker.remove(() => {});
-            app.stage.removeChild(ball);
+            renderer.ticker.remove(() => {});
+            renderer.stage.removeChild(ball);
           }
         });
       });
@@ -49,10 +50,10 @@ export default defineComponent({
     function addBall() {
       const ball = createBall();
       balls.push(ball);
-      app.stage.addChild(ball);
+      renderer.stage.addChild(ball);
     }
 
-    app.ticker.add(() => {
+    renderer.ticker.add(() => {
       if (balls.length < 10) {
         addBall();
       }
@@ -68,8 +69,8 @@ export default defineComponent({
     class="game"
   >
     <div
-      ref="game__field"
-      class="game__field"
+      ref="game__renderer"
+      class="game__renderer"
     >
     </div>
   </div>
