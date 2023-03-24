@@ -1,5 +1,6 @@
 <script>
 import ballImg from '../assets/ball.png';
+import backImg from '../assets/background.svg';
 import { defineComponent } from 'vue';
 import * as PIXI from 'pixi.js';
 
@@ -24,6 +25,14 @@ export default defineComponent({
     window.addEventListener('resize', () => {
       renderer.renderer.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
     });
+
+    const backTexture = PIXI.Texture.from(backImg);
+    const back = new PIXI.Sprite(backTexture);
+    back.x = 0;
+    back.y = 0;
+    back.width = renderer.screen.width;
+    back.height = renderer.screen.height;
+    renderer.stage.addChild(back);
 
     const ballTexture = PIXI.Texture.from(ballImg);
     const balls = [];
