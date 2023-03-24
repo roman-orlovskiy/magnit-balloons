@@ -57,6 +57,9 @@ export default defineComponent({
       if (balls.length < 10) {
         addBall();
       }
+      if (balls[7]) {
+        balls[7].y -= 2;
+      }
     });
   },
 });
