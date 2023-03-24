@@ -1,77 +1,22 @@
-<script lang="ts">
+<script lang="ts" setup>
+import { onMounted, ref } from 'vue';
 import * as PIXI from 'pixi.js';
-import { defineComponent } from 'vue';
-import backImg from '../assets/background.svg';
-import ballImg from '../assets/ball.svg';
 
-export default defineComponent({
-  data() {
-    return {
-      score: 0,
-    };
-  },
-  mounted() {
-    const gameContainer = this.$refs.game;
-
-    const renderer = new PIXI.Application({
-      width: gameContainer.offsetWidth,
-      height: gameContainer.offsetHeight,
+const game = ref(null);
+const gameView = ref(null);
+onMounted(() => {
+    const pixiApp = new PIXI.Application({
+      width: game.value.offsetWidth,
+      height: game.value.offsetHeight,
       antialias: true,
       resolution: 1,
     });
 
-    this.$refs.game__renderer.appendChild(renderer.view);
+    gameView.value.appendChild(pixiApp.view);
     window.addEventListener('resize', () => {
-      renderer.renderer.resize(gameContainer.offsetWidth, gameContainer.offsetHeight);
+      pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
     });
-
-    const backTexture = PIXI.Texture.from(backImg);
-    const back = new PIXI.Sprite(backTexture);
-    back.x = 0;
-    back.y = 0;
-    back.width = renderer.screen.width;
-    back.height = renderer.screen.height;
-    renderer.stage.addChild(back);
-
-    const ballTexture = PIXI.Texture.from(ballImg);
-    const balls = [];
-
-    function createBall() {
-      const ball = new PIXI.Sprite(ballTexture);
-      ball.anchor.set(0.5);
-      ball.x = Math.random() * renderer.screen.width;
-      ball.y = Math.random() * renderer.screen.height;
-      ball.interactive = true;
-      ball.buttonMode = true;
-      ball.on('pointerdown', () => {
-        renderer.ticker.add(() => {
-          ball.alpha -= 0.1;
-          if (ball.alpha <= 0) {
-            renderer.ticker.remove(() => {});
-            renderer.stage.removeChild(ball);
-          }
-        });
-      });
-      return ball;
-    }
-
-    function addBall() {
-      const ball = createBall();
-      balls.push(ball);
-      renderer.stage.addChild(ball);
-    }
-
-    renderer.ticker.add(() => {
-      if (balls.length < 10) {
-        addBall();
-      }
-      if (balls[7]) {
-        balls[7].y -= 2;
-      }
-    });
-  },
 });
-
 </script>
 
 <template>
@@ -79,11 +24,7 @@ export default defineComponent({
     ref="game"
     class="game"
   >
-    <div
-      ref="game__renderer"
-      class="game__renderer"
-    >
-    </div>
+    <div ref="gameView" />
   </div>
 </template>
 
