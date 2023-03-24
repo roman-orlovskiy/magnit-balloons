@@ -1,8 +1,8 @@
-<script>
-import ballImg from '../assets/ball.png';
-import backImg from '../assets/background.svg';
-import { defineComponent } from 'vue';
+<script lang="ts">
 import * as PIXI from 'pixi.js';
+import { defineComponent } from 'vue';
+import backImg from '../assets/background.svg';
+import ballImg from '../assets/ball.svg';
 
 export default defineComponent({
   data() {
@@ -17,7 +17,6 @@ export default defineComponent({
       width: gameContainer.offsetWidth,
       height: gameContainer.offsetHeight,
       antialias: true,
-      transparent: true,
       resolution: 1,
     });
 
