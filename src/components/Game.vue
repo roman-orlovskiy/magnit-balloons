@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
 import * as PIXI from 'pixi.js';
-import getBackground from '../pixi-utils/getBackground';
+import { getBackground, setBackground } from '../pixi-utils/getBackground';
 
 const game = ref(null);
 const gameView = ref(null);
@@ -14,12 +14,13 @@ onMounted(() => {
     });
 
     gameView.value.appendChild(pixiApp.view);
-    window.addEventListener('resize', () => {
-      pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
-    });
 
     const background = getBackground(pixiApp);
     pixiApp.stage.addChild(background);
+    window.addEventListener('resize', () => {
+      pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
+      setBackground(pixiApp);
+    });
 });
 </script>
 
