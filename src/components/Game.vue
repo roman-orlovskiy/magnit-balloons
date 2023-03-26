@@ -15,7 +15,7 @@ onMounted(() => {
   new Ball();
   setInterval(() => {
     new Ball();
-  }, 750);
+  }, 1000);
 
   window.addEventListener('resize', () => {
     pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);

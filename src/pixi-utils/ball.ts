@@ -54,6 +54,10 @@ class Ball {
     this.speed = getRandomInt(1, 3);
     this.pixiApp.ticker.add(() => {
       this.item.y -= this.speed;
+      if (this.item.y < - (this.item.height + 5)) {
+        this.pixiApp.ticker.remove(() => {});
+        this.pixiApp.stage.removeChild(this.item);
+      }
     });
     window.addEventListener('resize', () => this.updateSize);
   }
