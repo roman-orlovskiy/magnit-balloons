@@ -1,19 +1,24 @@
 import * as PIXI from 'pixi.js';
 import getPixiApp from "./getPixiApp";
 
-const backTexture = PIXI.Texture.from('/images/background.svg');
-const back = new PIXI.Sprite(backTexture);
+class Background {
+  item: PIXI.Sprite;
 
-function setBackground() {
-  const pixiApp = getPixiApp();
-  back.x = 0;
-  back.y = 0;
-  back.width = pixiApp.screen.width;
-  back.height = pixiApp.screen.height;
+  constructor() {
+    const pixiApp = getPixiApp();
+    const backTexture = PIXI.Texture.from('/images/background.svg');
+    this.item = new PIXI.Sprite(backTexture);
+    this.updateSizes();
+    pixiApp.stage.addChild(this.item);
+  }
+
+  updateSizes() {
+    const pixiApp = getPixiApp();
+    this.item.x = 0;
+    this.item.y = 0;
+    this.item.width = pixiApp.screen.width;
+    this.item.height = pixiApp.screen.height;
+  }
 }
 
-function getBackground() {
-  return back;
-}
-
-export { setBackground, getBackground };
+export default Background;
