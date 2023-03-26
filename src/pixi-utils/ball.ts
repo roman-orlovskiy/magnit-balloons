@@ -54,7 +54,7 @@ class Ball {
     this.speed = getRandomInt(1, 3);
     this.pixiApp.ticker.add(() => {
       this.item.y -= this.speed;
-      if (this.item.y < - (this.item.height + 5)) {
+      if (this.item.y < 15) {
         this.pixiApp.ticker.remove(() => {});
         this.pixiApp.stage.removeChild(this.item);
       }

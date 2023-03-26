@@ -14,7 +14,7 @@ function stop() {
 function play() {
   intervalId = setInterval(() => {
     new Ball();
-  }, 1000);
+  }, 1500);
 }
 function handleResize() {
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
