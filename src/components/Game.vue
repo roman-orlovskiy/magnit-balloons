@@ -1,26 +1,24 @@
 <script lang="ts" setup>
 import { onMounted, ref } from 'vue';
-import * as PIXI from 'pixi.js';
-import { getBackground, setBackground } from '../pixi-utils/getBackground';
+import getPixiApp from '../pixi-utils/getPixiApp';
+import { getBackground, setBackground } from '../pixi-utils/background';
 
 const game = ref(null);
 const gameView = ref(null);
 onMounted(() => {
-    const pixiApp = new PIXI.Application({
-      width: game.value.offsetWidth,
-      height: game.value.offsetHeight,
-      antialias: true,
-      resolution: 1,
-    });
+  const pixiApp = getPixiApp();
+  pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
+  gameView.value.appendChild(pixiApp.view);
 
-    gameView.value.appendChild(pixiApp.view);
+  const background = getBackground();
+  setBackground();
+  pixiApp.stage.addChild(background);
 
-    const background = getBackground(pixiApp);
-    pixiApp.stage.addChild(background);
-    window.addEventListener('resize', () => {
-      pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
-      setBackground(pixiApp);
-    });
+
+  window.addEventListener('resize', () => {
+    pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
+    setBackground();
+  });
 });
 </script>
 
