@@ -2,6 +2,7 @@
 import { onMounted, ref } from 'vue';
 import getPixiApp from '../pixi-utils/getPixiApp';
 import { getBackground, setBackground } from '../pixi-utils/background';
+import { getBall } from '../pixi-utils/ball';
 
 const game = ref(null);
 const gameView = ref(null);
@@ -14,6 +15,8 @@ onMounted(() => {
   setBackground();
   pixiApp.stage.addChild(background);
 
+  const ball = getBall();
+  pixiApp.stage.addChild(ball);
 
   window.addEventListener('resize', () => {
     pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
