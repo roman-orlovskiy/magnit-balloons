@@ -59,7 +59,7 @@ class Ball {
         this.pixiApp.stage.removeChild(this.item);
       }
     });
-    window.addEventListener('resize', () => this.updateSize);
+    window.addEventListener('resize', this.updateSize.bind(this));
   }
 }
 

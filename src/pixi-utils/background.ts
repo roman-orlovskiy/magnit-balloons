@@ -12,7 +12,7 @@ class Background {
     this.item = new PIXI.Sprite(backTexture);
     this.updateSize();
     this.pixiApp.stage.addChild(this.item);
-    window.addEventListener('resize', () => this.updateSize);
+    window.addEventListener('resize', this.updateSize.bind(this));
   }
 
   updateSize() {
