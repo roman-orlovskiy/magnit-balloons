@@ -3,12 +3,14 @@ lockfileVersion: 5.4
 specifiers:
   '@types/node': ^18.15.9
   '@vitejs/plugin-vue': ^4.0.0
+  pixi-svg: ^3.2.0
   pixi.js: ^7.2.2
   typescript: ^5.0.2
   vite: ^4.1.0
   vue: ^3.2.45
 
 dependencies:
+  pixi-svg: 3.2.0
   pixi.js: 7.2.2
   vue: 3.2.47
 
@@ -785,6 +787,12 @@ packages:
 
   /picocolors/1.0.0:
     resolution: {integrity: sha512-1fygroTLlHu66zi26VoTDv8yRgm0Fccecssto+MhsZ0D/DGW2sm8E8AjW7NU5VVTRt5GxbeZ5qBuJr+HyLYkjQ==}
+
+  /pixi-svg/3.2.0:
+    resolution: {integrity: sha512-03S6IG2l7sI+WWz1aK3GE65h1rceHEcTO8AhNxZlRB+S2lFccY6mazu/J4chUatbxR2XDrc2Q4X03PfduyLr1Q==}
+    peerDependencies:
+      '@pixi/graphics': '>=5.0.0'
+    dev: false
 
   /pixi.js/7.2.2:
     resolution: {integrity: sha512-fY/DvZyK5DbgP1CU0VpauZ3c3ls7YcqXMTe2x6b787dm7WOuXeIF3L5yIBtf/38+ZmcqTqCN/PWYA9v6HZ/SQg==}
