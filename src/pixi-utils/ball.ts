@@ -17,18 +17,31 @@ class Ball {
   item: SVG;
   pixiApp: PIXI.Application;
 
+  private relativeWidth: number;
+  private hw: number;
+
   getRandomColor() {
     const colors = ['#FFD43B', '#67C7FD', '#FF76C2'];
     const colorIndex = getRandomInt(0, colors.length - 1);
 
     return colors[colorIndex];
   }
+
+  updateSize() {
+    this.item.width = this.pixiApp.screen.width * (this.relativeWidth / 100);
+    this.item.height = this.hw * this.item.width;
+  }
+
   constructor() {
     this.pixiApp = getPixiApp();
     const color = this.getRandomColor();
     this.item = new SVG(getBallSVG(color));
     this.item.x = getRandomInt(20, 330);
     this.item.y = getRandomInt(50, 440);
+    const { width, height } = this.item;
+    this.hw = height / width;
+    this.relativeWidth = getRandomInt(18, 31);
+    this.updateSize();
     this.pixiApp.stage.addChild(this.item);
   }
 }

@@ -16,11 +16,14 @@ onMounted(() => {
   balls.forEach((item, index) => {
     const ball = new Ball();
     balls[index] = ball;
-  })
+  });
 
   window.addEventListener('resize', () => {
     pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
     background.updateSize();
+    balls.forEach((ball) => {
+      ball.updateSize();
+    });
   });
 });
 </script>
