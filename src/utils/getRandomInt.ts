@@ -1,5 +1,5 @@
-function getRandomInt(max: number) {
-  return Math.floor(Math.random() * Math.floor(max));
+function getRandomInt(minValue: number, maxValue: number) {
+  return Math.floor(Math.random() * (maxValue - minValue + 1)) + minValue;
 }
 
 export default getRandomInt;

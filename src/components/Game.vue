@@ -12,7 +12,11 @@ onMounted(() => {
   gameView.value.appendChild(pixiApp.view);
 
   const background = new Background();
-  const ball = new Ball();
+  const balls = [null, null, null, null, null];
+  balls.forEach((item, index) => {
+    const ball = new Ball();
+    balls[index] = ball;
+  })
 
   window.addEventListener('resize', () => {
     pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
