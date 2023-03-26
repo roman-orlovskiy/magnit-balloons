@@ -17,8 +17,8 @@ class Ball {
   item: SVG;
   pixiApp: PIXI.Application;
 
-  private relativeWidth: number;
-  private hw: number;
+  relativeWidth: number;
+  hw: number;
 
   getRandomColor() {
     const colors = ['#FFD43B', '#67C7FD', '#FF76C2'];
@@ -36,12 +36,12 @@ class Ball {
     this.pixiApp = getPixiApp();
     const color = this.getRandomColor();
     this.item = new SVG(getBallSVG(color));
-    this.item.x = getRandomInt(20, 330);
-    this.item.y = getRandomInt(50, 440);
     const { width, height } = this.item;
     this.hw = height / width;
     this.relativeWidth = getRandomInt(18, 31);
     this.updateSize();
+    this.item.x = getRandomInt(20, 330);
+    this.item.y = getRandomInt(50, 440);
     this.pixiApp.stage.addChild(this.item);
   }
 }
