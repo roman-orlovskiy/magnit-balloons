@@ -18,6 +18,12 @@ class Ball {
   pixiApp: PIXI.Application;
 
   relativeWidth: number;
+
+  relativeIndent: number;
+
+  speed: number;
+
+  relativeX: number;
   hw: number;
 
   getRandomColor() {
@@ -30,6 +36,7 @@ class Ball {
   updateSize() {
     this.item.width = this.pixiApp.screen.width * (this.relativeWidth / 100);
     this.item.height = this.hw * this.item.width;
+    this.item.x = this.pixiApp.screen.width * (this.relativeX / 100);
   }
 
   constructor() {
@@ -39,10 +46,15 @@ class Ball {
     const { width, height } = this.item;
     this.hw = height / width;
     this.relativeWidth = getRandomInt(18, 31);
+    this.relativeIndent = 5;
+    this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
     this.updateSize();
-    this.item.x = getRandomInt(20, 330);
-    this.item.y = getRandomInt(50, 440);
+    this.item.y = this.pixiApp.screen.height + getRandomInt(10, 50);
     this.pixiApp.stage.addChild(this.item);
+    this.speed = getRandomInt(1, 3);
+    this.pixiApp.ticker.add(() => {
+      this.item.y -= this.speed;
+    });
   }
 }
 
