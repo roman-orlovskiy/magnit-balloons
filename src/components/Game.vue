@@ -1,25 +1,41 @@
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue';
+import {onBeforeUnmount, onMounted, ref} from 'vue';
 import getPixiApp from '../pixi-utils/getPixiApp';
 import Background from '../pixi-utils/background';
 import Ball from '../pixi-utils/ball';
 
 const game = ref(null);
 const gameView = ref(null);
+const pixiApp = ref(null);
+let intervalId = null;
+function stop() {
+  clearInterval(intervalId)
+}
+function play() {
+  intervalId = setInterval(() => {
+    new Ball();
+  }, 1000);
+}
+function handleResize() {
+  pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
+}
 onMounted(() => {
-  const pixiApp = getPixiApp();
-  pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
-  gameView.value.appendChild(pixiApp.view);
+  pixiApp.value = getPixiApp();
+  pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
+  gameView.value.appendChild(pixiApp.value.view);
 
   new Background();
   new Ball();
-  setInterval(() => {
-    new Ball();
-  }, 1000);
+  play();
 
-  window.addEventListener('resize', () => {
-    pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
-  });
+  window.addEventListener('resize', handleResize);
+  window.addEventListener('focus', play);
+  window.addEventListener('blur', stop);
+});
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', handleResize);
+  window.addEventListener('focus', play);
+  window.addEventListener('blur', stop);
 });
 </script>
 
