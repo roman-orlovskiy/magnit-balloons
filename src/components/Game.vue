@@ -2,7 +2,7 @@
 import { onMounted, ref } from 'vue';
 import getPixiApp from '../pixi-utils/getPixiApp';
 import Background from '../pixi-utils/background';
-import { getBall } from '../pixi-utils/ball';
+import Ball from '../pixi-utils/ball';
 
 const game = ref(null);
 const gameView = ref(null);
@@ -12,13 +12,11 @@ onMounted(() => {
   gameView.value.appendChild(pixiApp.view);
 
   const background = new Background();
-
-  const ball = getBall();
-  pixiApp.stage.addChild(ball);
+  const ball = new Ball();
 
   window.addEventListener('resize', () => {
     pixiApp.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
-    background.updateSizes();
+    background.updateSize();
   });
 });
 </script>

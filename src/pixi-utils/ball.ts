@@ -1,17 +1,18 @@
 import * as PIXI from 'pixi.js';
+import getPixiApp from "./getPixiApp";
 
-function setBall() {
+class Ball {
+  item: PIXI.Sprite;
+  pixiApp: PIXI.Application;
+  constructor() {
+    const ballTexture = PIXI.Texture.from('/images/ball.svg');
+
+    this.pixiApp = getPixiApp();
+    this.item = new PIXI.Sprite(ballTexture);
+    this.item.x = 30;
+    this.item.y = 130;
+    this.pixiApp.stage.addChild(this.item);
+  }
 }
 
-function getBall() {
-  const ballTexture = PIXI.Texture.from('/images/ball.svg');
-  const ball = new PIXI.Sprite(ballTexture);
-
-  ball.x = 30;
-  ball.y = 130;
-  ball.width = 60;
-
-  return ball;
-}
-
-export { setBall, getBall };
+export default Ball;

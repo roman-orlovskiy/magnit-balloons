@@ -10,11 +10,11 @@ class Background {
 
     this.pixiApp = getPixiApp();
     this.item = new PIXI.Sprite(backTexture);
-    this.updateSizes();
+    this.updateSize();
     this.pixiApp.stage.addChild(this.item);
   }
 
-  updateSizes() {
+  updateSize() {
     this.item.x = 0;
     this.item.y = 0;
     this.item.width = this.pixiApp.screen.width;
