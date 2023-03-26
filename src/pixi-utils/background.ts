@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js';
-import getPixiApp from "./getPixiApp";
+import getPixiApp from './getPixiApp';
 
 class Background {
   item: PIXI.Sprite;
@@ -12,6 +12,7 @@ class Background {
     this.item = new PIXI.Sprite(backTexture);
     this.updateSize();
     this.pixiApp.stage.addChild(this.item);
+    window.addEventListener('resize', () => this.updateSize);
   }
 
   updateSize() {

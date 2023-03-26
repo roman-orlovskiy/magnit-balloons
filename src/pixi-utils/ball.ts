@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import { SVG } from 'pixi-svg';
-import getPixiApp from "./getPixiApp";
-import getRandomInt from "../utils/getRandomInt";
+import getPixiApp from './getPixiApp';
+import getRandomInt from '../utils/getRandomInt';
 
 const getBallSVG = (color: string) => `
 <svg id="ball-svg" width="95" height="125" viewBox="0 0 95 125" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -55,6 +55,7 @@ class Ball {
     this.pixiApp.ticker.add(() => {
       this.item.y -= this.speed;
     });
+    window.addEventListener('resize', () => this.updateSize);
   }
 }
 

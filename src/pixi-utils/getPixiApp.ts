@@ -1,7 +1,10 @@
 import { getCurrentInstance } from 'vue';
 
+let internalInstance = null;
 function getPixiApp() {
-  const internalInstance = getCurrentInstance();
+  if (!internalInstance) {
+   internalInstance = getCurrentInstance();
+  }
   return internalInstance.appContext.config.globalProperties.pixiApp;
 }
 
