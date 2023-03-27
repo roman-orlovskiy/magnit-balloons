@@ -45,9 +45,9 @@ class Ball {
   }
 
   clearItem() {
-    this.pixiApp.stage.removeChild(this.item);
-    window.removeEventListener('resize', this.updateSize);
     this.handleOnSplash(this.item);
+    this.item.y = this.initY;
+    this.item.gotoAndStop(0);
   }
 
   splash() {
@@ -81,15 +81,13 @@ class Ball {
     this.relativeIndent = 5;
     this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
     this.updateSize();
-    this.initY = this.pixiApp.screen.height + getRandomInt(10, 3 * this.pixiApp.screen.height);
+    this.initY = this.pixiApp.screen.height + getRandomInt(10, 4 * this.pixiApp.screen.height);
     this.item.y = this.initY;
     this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
     window.addEventListener('resize', this.updateSize);
-    setTimeout(() => {
-      this.pixiApp.stage.addChild(this.item);
-    }, 0);
+    this.pixiApp.stage.addChild(this.item);
   }
 }
 

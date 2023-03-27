@@ -10,14 +10,10 @@ const pixiApp = ref(null);
 const background = ref(null);
 const score = ref(0);
 const record = ref(0);
-const stepBallsCount = 20;
+const stepBallsCount = 26;
 const balls = {};
-let counter = 0;
 
-function handleOnSplash(ball) {
-  delete balls[ball.id];
-  counter++;
-  balls[counter] = new Ball(counter, handleOnSplash);
+function handleOnSplash() {
   score.value += 1;
   if (score.value > record.value) {
     localStorage.setItem('record', score.value.toString());
@@ -25,14 +21,11 @@ function handleOnSplash(ball) {
 }
 
 function createBalls() {
-  let localCounter = 0;
+  let counter = 0;
   pixiApp.value.ticker.add(() => {
     counter++;
-    localCounter++;
-    if (localCounter <= stepBallsCount) {
+    if (counter <= stepBallsCount) {
       balls[counter] = new Ball(counter, handleOnSplash);
-    } else {
-      pixiApp.value.ticker.remove(() => {});
     }
     for (const ballsKey in balls) {
       balls[ballsKey].move();
