@@ -44,7 +44,10 @@ onBeforeUnmount(() => {
     ref="game"
     class="game"
   >
-    <div ref="gameView" />
+    <div
+      ref="gameView"
+      class="game__view"
+    />
   </div>
 </template>
 
@@ -55,5 +58,9 @@ onBeforeUnmount(() => {
   width: 100%;
   height: 100%;
   position: relative;
+}
+.game__view {
+  height: 100%;
+  display: flex;
 }
 </style>
