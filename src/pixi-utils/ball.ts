@@ -67,8 +67,7 @@ class Ball {
     this.item.y = this.pixiApp.screen.height + getRandomInt(10, 50);
     this.pixiApp.stage.addChild(this.item);
     this.speed = getRandomInt(1, 3);
-    this.item.interactive = true;
-    this.item.buttonMode = true;
+    this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
     this.pixiApp.ticker.add(() => {
       if (this.item.y < 15) {
