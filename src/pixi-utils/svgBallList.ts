@@ -21,31 +21,31 @@ const svgBallList = [
 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.25202 64.8319C1.33835 64.7933 1.42463 64.7547 1.51095 64.716C4.60208 63.3316 7.74474 61.9241 15.1467 61.1089L8.95951 57.3996L17.7781 51.1867L1.38376 53.3354C1.11474 55.3867 0.976074 57.4491 0.976074 59.5082C0.976074 61.2766 1.07055 63.0533 1.25202 64.8319Z" fill="url(#paint8_radial_4_354)"/>
 <defs>
 <radialGradient id="paint0_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(13.2577 9.64414) rotate(58.1728) scale(15.2774 20.1199)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint1_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(46.5969 4.46077) rotate(53.5602) scale(12.3784 17.3854)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint2_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80.0851 12.0564) rotate(52.9392) scale(11.7183 16.5644)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint3_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(82.4738 44.5617) rotate(44.4971) scale(15.1322 22.2351)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint4_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(80.0342 74.4227) rotate(42.7718) scale(14.4372 21.1531)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint5_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(71.0742 98.5078) rotate(59.9619) scale(13.7943 17.5698)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint6_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(42.11 111.401) rotate(58.662) scale(20.9532 27.3575)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint7_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(17.0605 87.4948) rotate(48.5831) scale(18.5944 27.1132)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 <radialGradient id="paint8_radial_4_354" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(6.78876 56.2022) rotate(44.8721) scale(11.2955 16.5999)">
-<stop offset="0.520283" stop-color="#FFD63D"/>
+<stop offset="0.520283" stop-color="${color}"/>
 </radialGradient>
 </defs>
 </svg>
