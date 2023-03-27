@@ -41,14 +41,6 @@ function handleResize() {
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
 }
 
-function saveScore() {
-  const localStorageRecord = localStorage.getItem('record');
-  if (localStorageRecord === null || score.value > parseInt(localStorageRecord)) {
-    localStorage.setItem('record', score.value.toString());
-  }
-}
-
-
 onMounted(() => {
   pixiApp.value = getPixiApp();
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
@@ -62,7 +54,14 @@ onMounted(() => {
 
   createBalls();
   window.addEventListener('resize', handleResize);
-  window.addEventListener('beforeunload', saveScore);
+  window.onbeforeunload = function () {
+    const localStorageRecord = localStorage.getItem('record');
+    if (localStorageRecord === null || score.value > parseInt(localStorageRecord)) {
+      localStorage.setItem('record', score.value.toString());
+      return 'Ура! Новый рекорд!';
+    }
+    return 'Предыдущий рекорд не побит!';
+  }
 });
 onBeforeUnmount(() => {
   delete background.value;
