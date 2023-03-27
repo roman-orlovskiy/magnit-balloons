@@ -7,12 +7,13 @@ class Background {
 
   constructor() {
     const backTexture = PIXI.Texture.from('/images/background.svg');
+    this.updateSize = this.updateSize.bind(this);
 
     this.pixiApp = getPixiApp();
     this.item = new PIXI.Sprite(backTexture);
     this.updateSize();
     this.pixiApp.stage.addChild(this.item);
-    window.addEventListener('resize', this.updateSize.bind(this));
+    window.addEventListener('resize', this.updateSize);
   }
 
   updateSize() {

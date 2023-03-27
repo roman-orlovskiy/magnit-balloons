@@ -7,6 +7,7 @@ import Ball from '../pixi-utils/ball';
 const game = ref(null);
 const gameView = ref(null);
 const pixiApp = ref(null);
+const background = ref(null);
 
 function play() {
   setInterval(() => {
@@ -20,14 +21,15 @@ onMounted(() => {
   pixiApp.value = getPixiApp();
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
   gameView.value.appendChild(pixiApp.value.view);
+  background.value = new Background();
 
-  new Background();
   new Ball();
   // play();
 
   window.addEventListener('resize', handleResize);
 });
 onBeforeUnmount(() => {
+  delete background.value;
   window.removeEventListener('resize', handleResize);
 });
 </script>
