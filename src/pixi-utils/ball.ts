@@ -13,6 +13,8 @@ class Ball {
 
   speed: number;
 
+  color: string;
+
   relativeX: number;
   hw: number;
 
@@ -29,15 +31,17 @@ class Ball {
     this.item.x = this.pixiApp.screen.width * (this.relativeX / 100);
   }
 
+  getTexture(spriteNumber: number) {
+    const blob = new Blob([getBallSVG(this.color, spriteNumber)], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    return PIXI.Texture.from(url,undefined,undefined);
+  }
+
   constructor() {
     this.pixiApp = getPixiApp();
-    const color = this.getRandomColor();
-    const blob = new Blob([getBallSVG(color)], {type: 'image/svg+xml'});
-    const url = URL.createObjectURL(blob);
-    const ballTexture = PIXI.Texture.from(url,undefined,undefined);
-    this.item = new PIXI.Sprite(ballTexture);
-    const { width, height } = this.item;
-    this.hw = height / width;
+    this.color = this.getRandomColor();
+    this.item = new PIXI.Sprite(this.getTexture(0));
+    this.hw = 125 / 95;
     this.relativeWidth = getRandomInt(18, 31);
     this.relativeIndent = 5;
     this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
