@@ -4,7 +4,7 @@ import getRandomInt from '../utils/getRandomInt';
 import getBallSVG from './getBallSVG';
 
 class Ball {
-  item: PIXI.Sprite;
+  item: PIXI.AnimatedSprite;
   pixiApp: PIXI.Application;
 
   relativeWidth: number;
@@ -38,9 +38,13 @@ class Ball {
   }
 
   constructor() {
+    this.updateSize = this.updateSize.bind(this);
+
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
-    this.item = new PIXI.Sprite(this.getTexture(0));
+    this.item = new PIXI.AnimatedSprite([this.getTexture(0), this.getTexture(1)]);
+    this.item.animationSpeed = 0.3;
+    this.item.loop = false;
     this.hw = 125 / 95;
     this.relativeWidth = getRandomInt(18, 31);
     this.relativeIndent = 5;
@@ -52,12 +56,16 @@ class Ball {
     this.pixiApp.ticker.add(() => {
       if (this.item.y < 15) {
         this.pixiApp.ticker.remove(() => {});
-        this.pixiApp.stage.removeChild(this.item);
+        this.item.play();
+        this.item.onComplete = () => {
+          this.pixiApp.stage.removeChild(this.item);
+          window.removeEventListener('resize', this.updateSize);
+        };
       } else {
         this.item.y -= this.speed;
       }
     });
-    window.addEventListener('resize', this.updateSize.bind(this));
+    window.addEventListener('resize', this.updateSize);
   }
 }
 
