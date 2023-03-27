@@ -1,11 +1,10 @@
 import * as PIXI from 'pixi.js';
-import { SVG } from 'pixi-svg';
 import getPixiApp from './getPixiApp';
 import getRandomInt from '../utils/getRandomInt';
 import getBallSVG from './getBallSVG';
 
 class Ball {
-  item: SVG;
+  item: PIXI.Sprite;
   pixiApp: PIXI.Application;
 
   relativeWidth: number;
@@ -33,7 +32,10 @@ class Ball {
   constructor() {
     this.pixiApp = getPixiApp();
     const color = this.getRandomColor();
-    this.item = new SVG(getBallSVG(color));
+    const blob = new Blob([getBallSVG(color)], {type: 'image/svg+xml'});
+    const url = URL.createObjectURL(blob);
+    const ballTexture = PIXI.Texture.from(url,undefined,undefined);
+    this.item = new PIXI.Sprite(ballTexture);
     const { width, height } = this.item;
     this.hw = height / width;
     this.relativeWidth = getRandomInt(18, 31);
