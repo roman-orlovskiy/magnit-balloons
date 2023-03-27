@@ -57,7 +57,7 @@ class Ball {
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
     this.item = new PIXI.AnimatedSprite(this.getTextures());
-    this.item.animationSpeed = 0.3;
+    this.item.animationSpeed = 0.5;
     this.item.loop = false;
     this.hw = 125 / 95;
     this.relativeWidth = getRandomInt(18, 31);
@@ -66,7 +66,7 @@ class Ball {
     this.updateSize();
     this.item.y = this.pixiApp.screen.height + getRandomInt(10, 50);
     this.pixiApp.stage.addChild(this.item);
-    this.speed = getRandomInt(1, 3);
+    this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
     this.pixiApp.ticker.add(() => {
