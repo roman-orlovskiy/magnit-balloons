@@ -19,6 +19,9 @@ function handleOnSplash(ball) {
   counter++;
   balls[counter] = new Ball(counter, handleOnSplash);
   score.value += 1;
+  if (score.value > record.value) {
+    localStorage.setItem('record', score.value.toString());
+  }
 }
 
 function createBalls() {
@@ -54,14 +57,6 @@ onMounted(() => {
 
   createBalls();
   window.addEventListener('resize', handleResize);
-  window.onbeforeunload = function () {
-    const localStorageRecord = localStorage.getItem('record');
-    if (localStorageRecord === null || score.value > parseInt(localStorageRecord)) {
-      localStorage.setItem('record', score.value.toString());
-      return 'Ура! Новый рекорд!';
-    }
-    return 'Предыдущий рекорд не побит!';
-  }
 });
 onBeforeUnmount(() => {
   delete background.value;
