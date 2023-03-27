@@ -41,12 +41,16 @@ class Ball {
     return svgBallList.map(item => this.getTexture(item(this.color)));
   }
 
-  splash() {
+  clearItem() {
     this.pixiApp.ticker.remove(() => {});
+    this.pixiApp.stage.removeChild(this.item);
+    window.removeEventListener('resize', this.updateSize);
+  }
+
+  splash() {
     this.item.play();
     this.item.onComplete = () => {
-      this.pixiApp.stage.removeChild(this.item);
-      window.removeEventListener('resize', this.updateSize);
+      this.clearItem();
     };
   }
 
@@ -70,8 +74,8 @@ class Ball {
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
     this.pixiApp.ticker.add(() => {
-      if (this.item.y < 15) {
-        this.splash();
+      if (this.item.y < -(this.item.height)) {
+        this.clearItem();
       } else {
         this.item.y -= this.speed;
       }
