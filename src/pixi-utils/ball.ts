@@ -19,6 +19,7 @@ class Ball {
   hw: number;
   initY: number;
   id: number;
+  handleOnSplash(item) {};
 
   getRandomColor() {
     const colors = ['#FFD43B', '#67C7FD', '#FF76C2'];
@@ -46,6 +47,7 @@ class Ball {
   clearItem() {
     this.pixiApp.stage.removeChild(this.item);
     window.removeEventListener('resize', this.updateSize);
+    this.handleOnSplash(this.item);
   }
 
   splash() {
@@ -63,9 +65,10 @@ class Ball {
     }
   }
 
-  constructor(id) {
+  constructor(id, handleOnSplash) {
     this.updateSize = this.updateSize.bind(this);
     this.splash = this.splash.bind(this);
+    this.handleOnSplash = handleOnSplash;
 
     this.id = id;
     this.pixiApp = getPixiApp();
@@ -78,7 +81,7 @@ class Ball {
     this.relativeIndent = 5;
     this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
     this.updateSize();
-    this.initY = this.pixiApp.screen.height + getRandomInt(10, 2000);
+    this.initY = this.pixiApp.screen.height + getRandomInt(10, 3 * this.pixiApp.screen.height);
     this.item.y = this.initY;
     this.pixiApp.stage.addChild(this.item);
     this.speed = getRandomInt(3, 5);

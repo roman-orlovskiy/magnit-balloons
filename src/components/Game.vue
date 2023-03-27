@@ -12,16 +12,22 @@ const stepBallsCount = 20;
 const balls = {};
 let counter = 0;
 
+function handleOnSplash(ball) {
+  delete balls[ball.id];
+  counter++;
+  balls[counter] = new Ball(counter, handleOnSplash);
+}
+
 function createBalls() {
   let localCounter = 0;
   pixiApp.value.ticker.add(() => {
-    if (localCounter < stepBallsCount) {
-      balls[counter] = new Ball(counter);
+    counter++;
+    localCounter++;
+    if (localCounter <= stepBallsCount) {
+      balls[counter] = new Ball(counter, handleOnSplash);
     } else {
       pixiApp.value.ticker.remove(() => {});
     }
-    counter++;
-    localCounter++;
     for (const ballsKey in balls) {
       balls[ballsKey].move();
     }
