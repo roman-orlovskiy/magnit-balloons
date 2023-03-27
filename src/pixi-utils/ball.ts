@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js';
 import getPixiApp from './getPixiApp';
 import getRandomInt from '../utils/getRandomInt';
-import getBallSVG from './getBallSVG';
+import svgBallList from './svgBallList';
 
 class Ball {
   item: PIXI.AnimatedSprite;
@@ -31,10 +31,14 @@ class Ball {
     this.item.x = this.pixiApp.screen.width * (this.relativeX / 100);
   }
 
-  getTexture(spriteNumber: number) {
-    const blob = new Blob([getBallSVG(this.color, spriteNumber)], {type: 'image/svg+xml'});
+  getTexture(svgItem) {
+    const blob = new Blob([svgItem], {type: 'image/svg+xml'});
     const url = URL.createObjectURL(blob);
     return PIXI.Texture.from(url,undefined,undefined);
+  }
+
+  getTextures() {
+    return svgBallList.map(item => this.getTexture(item(this.color)));
   }
 
   constructor() {
@@ -42,7 +46,7 @@ class Ball {
 
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
-    this.item = new PIXI.AnimatedSprite([this.getTexture(0), this.getTexture(1)]);
+    this.item = new PIXI.AnimatedSprite(this.getTextures());
     this.item.animationSpeed = 0.3;
     this.item.loop = false;
     this.hw = 125 / 95;
