@@ -52,6 +52,7 @@ class Ball {
 
   constructor() {
     this.updateSize = this.updateSize.bind(this);
+    this.splash = this.splash.bind(this);
 
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
@@ -66,6 +67,9 @@ class Ball {
     this.item.y = this.pixiApp.screen.height + getRandomInt(10, 50);
     this.pixiApp.stage.addChild(this.item);
     this.speed = getRandomInt(1, 3);
+    this.item.interactive = true;
+    this.item.buttonMode = true;
+    this.item.on('pointerdown', this.splash);
     this.pixiApp.ticker.add(() => {
       if (this.item.y < 15) {
         this.splash();
