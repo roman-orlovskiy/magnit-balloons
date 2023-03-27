@@ -9,7 +9,7 @@ const gameView = ref(null);
 const pixiApp = ref(null);
 const background = ref(null);
 const score = ref(0);
-const record = ref(10);
+const record = ref(0);
 const stepBallsCount = 20;
 const balls = {};
 let counter = 0;
@@ -40,14 +40,29 @@ function createBalls() {
 function handleResize() {
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
 }
+
+function saveScore() {
+  const localStorageRecord = localStorage.getItem('record');
+  if (localStorageRecord === null || score.value > parseInt(localStorageRecord)) {
+    localStorage.setItem('record', score.value.toString());
+  }
+}
+
+
 onMounted(() => {
   pixiApp.value = getPixiApp();
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
   gameView.value.appendChild(pixiApp.value.view);
+  const localStorageRecord = localStorage.getItem('record');
+  if (localStorageRecord !== null) {
+    record.value = parseInt(localStorageRecord);
+  }
+
   background.value = new Background();
 
   createBalls();
   window.addEventListener('resize', handleResize);
+  window.addEventListener('beforeunload', saveScore);
 });
 onBeforeUnmount(() => {
   delete background.value;
