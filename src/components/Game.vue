@@ -120,9 +120,9 @@ onBeforeUnmount(() => {
 .game__topBar {
   position: absolute;
   z-index: 2000;
-  top: 10%;
-  left: 10%;
-  right: 10%;
+  top: 10vh;
+  left: 10vh;
+  right: 10vh;
 }
 .game__topBar>img {
   width: 100%;
