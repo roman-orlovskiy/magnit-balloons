@@ -17,6 +17,8 @@ class Ball {
 
   relativeX: number;
   hw: number;
+  initY: number;
+  id: number;
 
   getRandomColor() {
     const colors = ['#FFD43B', '#67C7FD', '#FF76C2'];
@@ -42,7 +44,6 @@ class Ball {
   }
 
   clearItem() {
-    this.pixiApp.ticker.remove(() => {});
     this.pixiApp.stage.removeChild(this.item);
     window.removeEventListener('resize', this.updateSize);
   }
@@ -54,10 +55,19 @@ class Ball {
     };
   }
 
-  constructor() {
+  move() {
+    if (this.item.y < -(this.item.height)) {
+      this.item.y = this.initY;
+    } else {
+      this.item.y -= this.speed;
+    }
+  }
+
+  constructor(id) {
     this.updateSize = this.updateSize.bind(this);
     this.splash = this.splash.bind(this);
 
+    this.id = id;
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
     this.item = new PIXI.AnimatedSprite(this.getTextures());
@@ -68,18 +78,12 @@ class Ball {
     this.relativeIndent = 5;
     this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
     this.updateSize();
-    this.item.y = this.pixiApp.screen.height + getRandomInt(10, 50);
+    this.initY = this.pixiApp.screen.height + getRandomInt(10, 2000);
+    this.item.y = this.initY;
     this.pixiApp.stage.addChild(this.item);
     this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
-    this.pixiApp.ticker.add(() => {
-      if (this.item.y < -(this.item.height)) {
-        this.clearItem();
-      } else {
-        this.item.y -= this.speed;
-      }
-    });
     window.addEventListener('resize', this.updateSize);
   }
 }

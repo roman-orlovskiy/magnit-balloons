@@ -8,13 +8,26 @@ const game = ref(null);
 const gameView = ref(null);
 const pixiApp = ref(null);
 const background = ref(null);
-const intervalId = ref(null);
+const stepBallsCount = 20;
+const balls = {};
+let counter = 0;
 
-function play() {
-  intervalId.value = setInterval(() => {
-    new Ball();
-  }, 800);
+function createBalls() {
+  let localCounter = 0;
+  pixiApp.value.ticker.add(() => {
+    if (localCounter < stepBallsCount) {
+      balls[counter] = new Ball(counter);
+    } else {
+      pixiApp.value.ticker.remove(() => {});
+    }
+    counter++;
+    localCounter++;
+    for (const ballsKey in balls) {
+      balls[ballsKey].move();
+    }
+  });
 }
+
 function handleResize() {
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
 }
@@ -24,14 +37,11 @@ onMounted(() => {
   gameView.value.appendChild(pixiApp.value.view);
   background.value = new Background();
 
-  new Ball();
-  play();
-
+  createBalls();
   window.addEventListener('resize', handleResize);
 });
 onBeforeUnmount(() => {
   delete background.value;
-  clearInterval(intervalId.value);
   window.removeEventListener('resize', handleResize);
 });
 </script>
