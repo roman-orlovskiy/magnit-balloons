@@ -83,11 +83,13 @@ class Ball {
     this.updateSize();
     this.initY = this.pixiApp.screen.height + getRandomInt(10, 3 * this.pixiApp.screen.height);
     this.item.y = this.initY;
-    this.pixiApp.stage.addChild(this.item);
     this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
     window.addEventListener('resize', this.updateSize);
+    setTimeout(() => {
+      this.pixiApp.stage.addChild(this.item);
+    }, 0);
   }
 }
 
