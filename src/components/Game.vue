@@ -8,11 +8,12 @@ const game = ref(null);
 const gameView = ref(null);
 const pixiApp = ref(null);
 const background = ref(null);
+const intervalId = ref(null);
 
 function play() {
-  setInterval(() => {
+  intervalId.value = setInterval(() => {
     new Ball();
-  }, 900);
+  }, 800);
 }
 function handleResize() {
   pixiApp.value.renderer.resize(game.value.offsetWidth, game.value.offsetHeight);
@@ -24,12 +25,13 @@ onMounted(() => {
   background.value = new Background();
 
   new Ball();
-  // play();
+  play();
 
   window.addEventListener('resize', handleResize);
 });
 onBeforeUnmount(() => {
   delete background.value;
+  clearInterval(intervalId.value);
   window.removeEventListener('resize', handleResize);
 });
 </script>
