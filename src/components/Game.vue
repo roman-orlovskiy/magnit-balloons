@@ -8,6 +8,8 @@ const game = ref(null);
 const gameView = ref(null);
 const pixiApp = ref(null);
 const background = ref(null);
+const score = ref(0);
+const record = ref(10);
 const stepBallsCount = 20;
 const balls = {};
 let counter = 0;
@@ -16,6 +18,7 @@ function handleOnSplash(ball) {
   delete balls[ball.id];
   counter++;
   balls[counter] = new Ball(counter, handleOnSplash);
+  score.value += 1;
 }
 
 function createBalls() {
@@ -57,6 +60,15 @@ onBeforeUnmount(() => {
     ref="game"
     class="game"
   >
+    <div class="game__topBar">
+      <div class="game__score">
+        {{ score }}
+      </div>
+      <div class="game__record">
+        {{ record }}
+      </div>
+      <img src="/images/topBar.png">
+    </div>
     <div class="game__cloud">
       <img src="/images/cloud.svg">
     </div>
@@ -89,5 +101,32 @@ onBeforeUnmount(() => {
 .game__cloud>img {
   width: 100%;
   display: block;
+}
+.game__topBar {
+  position: absolute;
+  z-index: 2000;
+  top: 10%;
+  left: 10%;
+  right: 10%;
+}
+.game__topBar>img {
+  width: 100%;
+  display: block;
+}
+
+.game__score {
+  position: absolute;
+  font-size: 4vh;
+  font-weight: bold;
+  left: 36%;
+  top: 28%;
+}
+
+.game__record {
+  position: absolute;
+  font-size: 4vh;
+  font-weight: bold;
+  left: 62%;
+  top: 28%;
 }
 </style>
