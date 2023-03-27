@@ -41,6 +41,15 @@ class Ball {
     return svgBallList.map(item => this.getTexture(item(this.color)));
   }
 
+  splash() {
+    this.pixiApp.ticker.remove(() => {});
+    this.item.play();
+    this.item.onComplete = () => {
+      this.pixiApp.stage.removeChild(this.item);
+      window.removeEventListener('resize', this.updateSize);
+    };
+  }
+
   constructor() {
     this.updateSize = this.updateSize.bind(this);
 
@@ -59,12 +68,7 @@ class Ball {
     this.speed = getRandomInt(1, 3);
     this.pixiApp.ticker.add(() => {
       if (this.item.y < 15) {
-        this.pixiApp.ticker.remove(() => {});
-        this.item.play();
-        this.item.onComplete = () => {
-          this.pixiApp.stage.removeChild(this.item);
-          window.removeEventListener('resize', this.updateSize);
-        };
+        this.splash();
       } else {
         this.item.y -= this.speed;
       }
