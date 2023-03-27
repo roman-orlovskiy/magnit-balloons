@@ -7,6 +7,8 @@ class Ball {
   item: PIXI.AnimatedSprite;
   pixiApp: PIXI.Application;
 
+  requestId: number;
+
   relativeWidth: number;
 
   relativeIndent: number;
@@ -42,9 +44,18 @@ class Ball {
   }
 
   clearItem() {
-    this.pixiApp.ticker.remove(() => {});
+    cancelAnimationFrame(this.requestId);
     this.pixiApp.stage.removeChild(this.item);
     window.removeEventListener('resize', this.updateSize);
+  }
+
+  animate() {
+    if (this.item.y < -(this.item.height)) {
+      this.clearItem();
+    } else {
+      this.item.y -= this.speed;
+    }
+    this.requestId = requestAnimationFrame(this.animate);
   }
 
   splash() {
@@ -57,6 +68,7 @@ class Ball {
   constructor() {
     this.updateSize = this.updateSize.bind(this);
     this.splash = this.splash.bind(this);
+    this.animate = this.animate.bind(this);
 
     this.pixiApp = getPixiApp();
     this.color = this.getRandomColor();
@@ -73,13 +85,7 @@ class Ball {
     this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';
     this.item.on('pointerdown', this.splash);
-    this.pixiApp.ticker.add(() => {
-      if (this.item.y < -(this.item.height)) {
-        this.clearItem();
-      } else {
-        this.item.y -= this.speed;
-      }
-    });
+    this.animate();
     window.addEventListener('resize', this.updateSize);
   }
 }

@@ -7,12 +7,9 @@ import Ball from '../pixi-utils/ball';
 const game = ref(null);
 const gameView = ref(null);
 const pixiApp = ref(null);
-let intervalId = null;
-function stop() {
-  clearInterval(intervalId)
-}
+
 function play() {
-  intervalId = setInterval(() => {
+  setInterval(() => {
     new Ball();
   }, 900);
 }
@@ -26,7 +23,7 @@ onMounted(() => {
 
   new Background();
   new Ball();
-  play();
+  // play();
 
   window.addEventListener('resize', handleResize);
 });
