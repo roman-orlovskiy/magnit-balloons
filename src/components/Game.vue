@@ -29,13 +29,9 @@ onMounted(() => {
   play();
 
   window.addEventListener('resize', handleResize);
-  window.addEventListener('focus', play);
-  window.addEventListener('blur', stop);
 });
 onBeforeUnmount(() => {
   window.removeEventListener('resize', handleResize);
-  window.addEventListener('focus', play);
-  window.addEventListener('blur', stop);
 });
 </script>
 
