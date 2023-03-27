@@ -10,7 +10,7 @@ const pixiApp = ref(null);
 const background = ref(null);
 const score = ref(0);
 const record = ref(0);
-const stepBallsCount = 26;
+const stepBallsCount = 25;
 const balls = {};
 
 function handleOnSplash() {
