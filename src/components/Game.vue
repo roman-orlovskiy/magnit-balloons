@@ -76,13 +76,17 @@ onBeforeUnmount(() => {
     class="game"
   >
     <div class="game__topBar">
-      <div class="game__score">
-        {{ score }}
+      <div class="game__topBar-inner">
+        <div class="game__score">
+          <span>
+            {{ score }}
+          </span>
+          <span>
+            {{ record }}
+          </span>
+        </div>
+        <img src="/images/topBar.png">
       </div>
-      <div class="game__record">
-        {{ record }}
-      </div>
-      <img src="/images/topBar.png">
     </div>
     <div class="game__cloud">
       <img src="/images/cloud.svg">
@@ -121,27 +125,32 @@ onBeforeUnmount(() => {
   position: absolute;
   z-index: 2000;
   top: 10vh;
-  left: 10vh;
-  right: 10vh;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
 }
-.game__topBar>img {
-  width: 100%;
+.game__topBar-inner {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  font-size: 3.3vh;
+}
+.game__topBar-inner>img {
   display: block;
+  width: 100%;
 }
-
 .game__score {
   position: absolute;
-  font-size: 4vh;
-  font-weight: bold;
-  left: 36%;
-  top: 28%;
-}
-
-.game__record {
-  position: absolute;
-  font-size: 4vh;
-  font-weight: bold;
-  left: 62%;
-  top: 28%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  padding: 0 6% 1% 11%;
+  align-items: center;
+  justify-content: space-evenly;
 }
 </style>
