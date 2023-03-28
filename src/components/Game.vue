@@ -64,13 +64,18 @@ onBeforeUnmount(() => {
   >
     <div class="game__topBar">
       <div class="game__topBar-inner">
-        <div class="game__score">
-          <span>
-            {{ score }}
-          </span>
-          <span>
-            {{ record }}
-          </span>
+        <div class="game__topBar-content">
+          <div class="game__topBar-inner game__topBar-inner--score">
+            <div class="game__topBar-content">
+              <div>
+                {{ score }}
+              </div>
+              <div>
+                {{ record }}
+              </div>
+            </div>
+            <img src="/images/topBar-inner.svg">
+          </div>
         </div>
         <img src="/images/topBar.svg">
       </div>
@@ -108,6 +113,17 @@ onBeforeUnmount(() => {
   width: 100%;
   display: block;
 }
+.game__topBar-content {
+  position: absolute;
+  top: -4px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
 .game__topBar {
   position: absolute;
   z-index: 2000;
@@ -119,25 +135,20 @@ onBeforeUnmount(() => {
 }
 .game__topBar-inner {
   width: 80%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   position: relative;
-  font-size: 3.3vh;
+}
+.game__topBar-inner--score {
+  width: 55%;
 }
 .game__topBar-inner>img {
   display: block;
   width: 100%;
 }
 .game__score {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  padding: 0 6% 1% 11%;
-  align-items: center;
-  justify-content: space-evenly;
+  width: 60%;
+}
+.game__score>img {
+  display: block;
+  width: 100%;
 }
 </style>
