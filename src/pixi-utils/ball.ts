@@ -47,7 +47,7 @@ class Ball {
   clearItem() {
     this.handleOnSplash(this.item);
     this.item.gotoAndStop(0);
-    this.initY = this.pixiApp.screen.height + getRandomInt(10, 4 * this.pixiApp.screen.height);
+    this.initY = this.pixiApp.screen.height + getRandomInt(0, 3 * this.pixiApp.screen.height);
     this.item.y = this.initY;
     this.speed = getRandomInt(3, 5);
     this.relativeWidth = getRandomInt(18, 31);
@@ -86,7 +86,7 @@ class Ball {
     this.relativeIndent = 5;
     this.relativeX = getRandomInt(this.relativeIndent, 100 - this.relativeIndent - this.relativeWidth);
     this.updateSize();
-    this.initY = this.pixiApp.screen.height + getRandomInt(10, 4 * this.pixiApp.screen.height);
+    this.initY = this.pixiApp.screen.height + getRandomInt(0, 3 * this.pixiApp.screen.height);
     this.item.y = this.initY;
     this.speed = getRandomInt(3, 5);
     this.item.eventMode = 'static';

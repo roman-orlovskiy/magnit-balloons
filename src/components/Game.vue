@@ -10,7 +10,7 @@ const pixiApp = ref(null);
 const background = ref(null);
 const score = ref(0);
 const record = ref(0);
-const stepBallsCount = 25;
+const stepBallsCount = 22;
 const balls = {};
 
 function handleOnSplash() {
@@ -68,10 +68,16 @@ onBeforeUnmount(() => {
           <div class="game__topBar-inner game__topBar-inner--score">
             <div class="game__topBar-content game__topBar-content--score">
               <div class="game__score">
-                {{ score }}
+                <img src="/images/ball.svg">
+                <div>
+                  {{ score }}
+                </div>
               </div>
               <div class="game__score">
-                {{ record }}
+                <img src="/images/star.svg">
+                <div>
+                  {{ record }}
+                </div>
               </div>
             </div>
             <img src="/images/topBar-inner.svg">
@@ -151,12 +157,12 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   font-size: 3.2vh;
+  width: 25%;
 }
-.game__score-icon {
 
-}
 .game__score>img {
   display: block;
-  width: 100%;
+  width: 3.8vh;
+  margin-right: 1.3vh;
 }
 </style>
