@@ -66,11 +66,11 @@ onBeforeUnmount(() => {
       <div class="game__topBar-inner">
         <div class="game__topBar-content">
           <div class="game__topBar-inner game__topBar-inner--score">
-            <div class="game__topBar-content">
-              <div>
+            <div class="game__topBar-content game__topBar-content--score">
+              <div class="game__score">
                 {{ score }}
               </div>
-              <div>
+              <div class="game__score">
                 {{ record }}
               </div>
             </div>
@@ -124,6 +124,9 @@ onBeforeUnmount(() => {
   align-items: center;
   z-index: 100;
 }
+.game__topBar-content--score {
+  justify-content: space-evenly;
+}
 .game__topBar {
   position: absolute;
   z-index: 2000;
@@ -145,7 +148,12 @@ onBeforeUnmount(() => {
   width: 100%;
 }
 .game__score {
-  width: 60%;
+  display: flex;
+  align-items: center;
+  font-size: 3.2vh;
+}
+.game__score-icon {
+
 }
 .game__score>img {
   display: block;
