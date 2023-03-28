@@ -80,7 +80,6 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-            <img src="/images/topBar-inner.svg">
           </div>
         </div>
         <img src="/images/topBar.svg">
@@ -131,7 +130,8 @@ onBeforeUnmount(() => {
   z-index: 100;
 }
 .game__topBar-content--score {
-  justify-content: space-evenly;
+  position: static;
+  justify-content: center;
 }
 .game__topBar {
   position: absolute;
@@ -147,7 +147,7 @@ onBeforeUnmount(() => {
   position: relative;
 }
 .game__topBar-inner--score {
-  width: 57%;
+  width: auto;
 }
 .game__topBar-inner>img {
   display: block;
@@ -157,7 +157,9 @@ onBeforeUnmount(() => {
   display: flex;
   align-items: center;
   font-size: 3.2vh;
-  width: 25%;
+}
+.game__score:first-child {
+  margin-right: 2vh;
 }
 
 .game__score>img {
