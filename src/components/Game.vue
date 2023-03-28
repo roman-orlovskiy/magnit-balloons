@@ -147,7 +147,7 @@ onBeforeUnmount(() => {
   position: relative;
 }
 .game__topBar-inner--score {
-  width: 55%;
+  width: 57%;
 }
 .game__topBar-inner>img {
   display: block;
