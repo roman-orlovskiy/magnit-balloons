@@ -148,6 +148,10 @@ onBeforeUnmount(() => {
 }
 .game__topBar-inner--score {
   width: auto;
+  background-image: url("/images/topBar-inner.png");
+  background-size: 100% 100%;
+  padding: 1.5% 5% 2% 5%;
+  background-repeat: no-repeat;
 }
 .game__topBar-inner>img {
   display: block;
