@@ -72,7 +72,7 @@ onBeforeUnmount(() => {
             {{ record }}
           </span>
         </div>
-        <img src="/images/topBar.png">
+        <img src="/images/topBar.svg">
       </div>
     </div>
     <div class="game__cloud">
